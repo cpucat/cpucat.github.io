@@ -3,5 +3,6 @@ body {
 }
 h1 {
   text-align: center;
-  color: yellow;
+  color: black;
+  font-size: 25px;
 }
