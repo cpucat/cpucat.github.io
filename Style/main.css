@@ -4,6 +4,13 @@ body {
 }
 h1 {
   text-align: center;
+  background-color: teal;
   color: black;
   font-size: 35px;
 }
+p {
+  text-align: center;
+  background-color: teal;
+  color: black;
+}
+
