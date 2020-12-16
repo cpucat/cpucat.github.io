@@ -1,5 +1,6 @@
 body {
-  background-color: teal;
+  background-image: url("/pictures/glitch.gif");
+  background-attachment: scroll;
 }
 h1 {
   text-align: center;
