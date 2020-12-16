@@ -1,6 +1,6 @@
 body {
   background-image: url("/pictures/ErrorBackGround.gif");
-  background-repeat: repeat-y;
-  background-position: right top;
+  background-repeat: repeat-x;
+  background-position: left-top;
   background-attachment: scroll;
 }
