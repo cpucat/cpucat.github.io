@@ -9,7 +9,10 @@ h1 {
   font-size: 35px;
 }
 p {
-  text-align: center;
+  background-color: teal;
+  color: black;
+}
+a {
   background-color: teal;
   color: black;
 }
