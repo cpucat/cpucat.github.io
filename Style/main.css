@@ -1,5 +1,5 @@
 body {
-  background-image: linear-gradient(red, yellow);
+  background-image: radial-gradient(yellow, green, blue);
 }
 h1 {
   text-align: center;
