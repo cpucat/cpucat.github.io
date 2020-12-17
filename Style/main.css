@@ -1,19 +1,12 @@
-body {
-  background-image: url("/pictures/glitch.gif");
-  background-attachment: scroll;
-}
 h1 {
   text-align: center;
-  background-color: teal;
   color: black;
   font-size: 35px;
 }
 p {
-  background-color: teal;
   color: black;
 }
 a {
-  background-color: black;
   color: blue;
 }
 
