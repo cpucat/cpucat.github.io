@@ -1,6 +1,10 @@
 body {
   background-color: DodgerBlue;
 }
+h2 {
+  color: grey;
+  text-shadow: 2px 4px 2px white;
+}
 h1 {
   text-shadow: 2px 2px 4px white;
   text-align: center;
