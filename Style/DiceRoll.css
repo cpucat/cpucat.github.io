@@ -2,16 +2,18 @@ body {
   background-color: DodgerBlue;
 }
 
-* {
+h1 {
   text-align: center;
 }
 
 #nobottom {
   margin-bottom: 0px;
+  text-align: center;
 }
 
 #die {
   margin-top: 0px;
+  text-align: center;
   font-size: 110px;
   color: white;
 }
