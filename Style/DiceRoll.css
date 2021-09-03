@@ -2,7 +2,7 @@ body {
   background-color: DodgerBlue;
 }
 
-button.nobottom {
+#nobottom {
   margin-bottom: 0px;
 }
 
