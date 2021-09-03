@@ -1,8 +1,9 @@
 body {
   background-color: DodgerBlue;
 }
+
 p {
-  margin-top; 0px;
+  margin-top: 0px;
   font-size: 110px;
   color: white;
 }
