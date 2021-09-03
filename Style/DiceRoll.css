@@ -2,6 +2,10 @@ body {
   background-color: DodgerBlue;
 }
 
+button.nobottom {
+  margin-bottom: 0px;
+}
+
 #die {
   margin-top: 0px;
   font-size: 110px;
