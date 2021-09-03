@@ -3,15 +3,22 @@ body {
 }
 
 h1 {
+  text-shadow: 2px 2px grey;
   text-align: center;
 }
 
-button {
+* {
   margin-bottom: 0px;
   text-align: center;
 }
 
+marquee {
+  text-shadow: 2px 2px grey;
+  text-align: left;
+}
+
 #die {
+  text-shadow: 2px 2px grey;
   margin-top: 0px;
   text-align: center;
   font-size: 110px;
