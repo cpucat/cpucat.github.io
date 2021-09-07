@@ -2,48 +2,6 @@
 <html>
   <head>
     <title>General JS, HTML, CSS Tests</title>
-    <script>
-      var greetingContainer = document.getElementById("greetingbox");
-      
-      function BAKECOOKIE(cookiname, cookivalue, expiredays) {
-        const cookdie = new Date();
-        cookdie.setTime(cookdie.getTime() + (expiredays*24*60*60*1000));
-        let expires = "expires="+ cookdie.toUTCString();
-         document.cookie = cookiname + "=" + cookivalue + ";" + expires + ";path=/";
-      }
-      
-      function GetName(cookiname) {
-        let cookiname = cookiname + "=";
-        let collectedcookie = decodeURIComponent(document.cookie);
-        let cookinga = collectedcookie.split(';');
-        for(let i = 0; i < cookinga.length; i++) {
-        let c = cookinga[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(cookiname) == 0) {
-          return c.substring(cookiname.length, c.length);
-          }
-        }
-        return "";
-      }
-      
-      function cookieCheck() {
-        let user = getCookie("username");
-        if (user!="") {
-          greetingContainer.innerHTML = "Hello " + user;
-        } else {
-          cookieReBaker()
-        }
-      }
-      
-      function cookieReBaker() {
-        var person = prompt("Please enter your name");
-        if (person != null && person != "") {
-          BAKECOOKIE("username", person, 15)
-        }
-      }
-    </script>
   </head>
   <body onload="cookieCheck()">
     <audio id="thereWasAReasonForRRoll">
@@ -73,11 +31,5 @@
       }
     </script>
     <br>
-    <p> Cookie Tests</p>
-    <p id="greetingbox">%GREETING%</p>
-    
-    
-    
-    
   </body>
 </html>
