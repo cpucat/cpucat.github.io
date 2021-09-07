@@ -49,7 +49,7 @@
       if (name != "") {
         document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
       } else {
-         name = prompt("Please enter your name for custom greetings:""");
+         name = prompt("Please enter your name for custom greetings:","");
          if (name != "" && name != null) {
            setCookie("username", name, 30);
            document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
