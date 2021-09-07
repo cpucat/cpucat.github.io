@@ -5,14 +5,23 @@
   </head>
   <body>
     <script>
-      var pOnMouseOver = document.getElementById("mouseOverOutSimplep")
+      var pOnMouseOver = document.getElementById("mouseOverOutSimplep");
+      var RRollContainer = document.getElementById("thereWasAReasonForRRoll");
+      
       function DemoPonMouseOver(){
         pOnMouseOver.innerHTML = "MouseOver";
       }
       function DemoPonMouseOut() {
         pOnMouseOver.innerHTML = "MouseOut";
       }
+      function playAudio() {
+        RRollContainer.play();
+      }
     </script>
+    <audio id="thereWasAReasonForRRoll">
+      <source src="https://cpucat.github.io/rroll.mp3" type="audio/mpeg">
+    Your Browser will not support RICKROLL.
+    </audio>
     <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
   </body>
 </html>
