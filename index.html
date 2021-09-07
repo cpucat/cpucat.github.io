@@ -6,7 +6,7 @@
   </head>
   <body onload="checkName()">
    <h1>Home</h1>
-   <h3 id="nameGreeting">helo</h3>
+   <h3 id="nameGreeting"></h3>
    <h2>Game Games</h2>
    <a href="https://cpucat.github.io/flight-unity/">Drone game</a><br>
    <a href="https://cpucat.github.io/dogfight-UNITY/">Play Dogfight (2-Player) NOT ONLINE</a><br>
@@ -47,11 +47,12 @@
     function checkName() {
       let name = getCookie("username");
       if (name != "") {
-        document.getElementById("nameGreeting").innerHTML = name;
+        document.getElementById("nameGreeting").innerHTML = "Hello, " + name;
       } else {
          name = prompt("Please enter your name:","");
          if (name != "" && name != null) {
            setCookie("username", name, 30);
+           document.getElementById("nameGreeting").innerHTML = "Hello, " + name;
          }
       }
     }
