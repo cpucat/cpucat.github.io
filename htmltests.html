@@ -11,15 +11,9 @@
     <br>
     <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
     <img onmouseover="playAudio()" src="https://cpucat.github.io/images/dont_touch_img.gif" name="pic" alt="Rickroll">
-    <br>
-    <p> Cookie Tests</p>
-    <p id="greetingbox">%GREETING%</p>
-    
-    
     <script>
       var pOnMouseOver = document.getElementById("mouseOverOutSimplep");
       var RRollContainer = document.getElementById("thereWasAReasonForRRoll");
-      var greetingContainer = document.getElementById("greetingbox");
       
       function DemoPonMouseOver(){
         pOnMouseOver.innerHTML = "MouseOver";
@@ -35,6 +29,15 @@
         RRollContainer.play();
         document.pic.src='https://cpucat.github.io/images/get_shreked.gif';
       }
+    </script>
+    <br>
+    <p> Cookie Tests</p>
+    <p id="greetingbox">%GREETING%</p>
+    
+    
+    <script>
+      var greetingContainer = document.getElementById("greetingbox");
+      
       function BAKECOOKIE(cookiname, cookivalue, expiredays) {
         const cookdie = new Date();
         cookdie.setTime(cookdie.getTime() + (expiredays*24*60*60*1000));
