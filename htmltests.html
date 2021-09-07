@@ -8,15 +8,18 @@
       <source src="https://cpucat.github.io/rroll.mp3" type="audio/mpeg">
     Your Browser will not support RICKROLL.
     </audio>
+    <br>
     <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
-    <br>
-    <br>
-    <br>
     <img onmouseover="playAudio()" src="https://cpucat.github.io/images/dont_touch_img.gif" name="pic" alt="Rickroll">
+    <br>
+    <p> Cookie Tests</p>
+    <p id="greetingbox" onload="cookieCheck()">%GREETING%</p>
+    
     
     <script>
       var pOnMouseOver = document.getElementById("mouseOverOutSimplep");
       var RRollContainer = document.getElementById("thereWasAReasonForRRoll");
+      var greetingContainer = document.getElementById("greetingbox");
       
       function DemoPonMouseOver(){
         pOnMouseOver.innerHTML = "MouseOver";
@@ -31,6 +34,44 @@
         window.alert("NEVER GIVE UP THIS MISTAKE");
         RRollContainer.play();
         document.pic.src='https://cpucat.github.io/images/get_shreked.gif';
+      }
+      function BAKECOOKIE(cookiname, cookivalue, expiredays) {
+        const cookdie = new Date();
+        cookdie.setTime(cookdie.getTime() + (expiredays*24*60*60*1000));
+        let expires = "expires="+ cookdie.toUTCString();
+         document.cookie = cookiname + "=" + cookivalue + ";" + expires + ";path=/";
+      }
+      
+      function GetName(cookiname) {
+        let cookiname = cookiname + "=";
+        let collectedcookie = decodeURIComponent(document.cookie);
+        let cookinga = collectedcookie.split(';');
+        for(let i = 0; i < cookinga.length; i++) {
+        let c = cookinga[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(cookiname) == 0) {
+          return c.substring(cookiname.length, c.length);
+          }
+        }
+        return "";
+      }
+      
+      function cookieCheck() {
+        let user = getCookie("username");
+        if (user!="") {
+          greetingContainer.innerHTML = "Hello " + user;
+        } else {
+          cookieReBaker()
+        }
+      }
+      
+      function cookieReBaker() {
+        var person = prompt("Please enter your name");
+        if (person != null && person != "") {
+          BAKECOOKIE("username", person, 15)
+        }
       }
     </script>
     
