@@ -4,6 +4,15 @@
     <title>General JS, HTML, CSS Tests</title>
   </head>
   <body>
-    <p id="mouseOverOutSimpleP" onmouseover="document.getElementById("mouseOverOutSimplep").innerHTML = "MouseOver";" onmouseout="document.getElementById("mouseOverOutSimplep").innerHTML = "MouseOut";">MouseDemo</p>
+    <script>
+      var pOnMouseOver = document.getElementById("mouseOverOutSimplep")
+      function DemoPonMouseOver(){
+        pOnMouseOver.innerHTML = "MouseOver";
+      }
+      function DemoPonMouseOut() {
+        pOnMouseOver.innerHTML = "MouseOut";
+      }
+    </script>
+    <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
   </body>
 </html>
