@@ -14,81 +14,81 @@
     <br>
     <marquee><a href="https://cpucat.github.io">Home</a></marquee>
     <script>
-   //I learned this from W3 Schools tutorials, check them out!
-    function setCookie(cookingname,cookingvalue,expiredays) {
-      const date = new Date();
-      date.setTime(date.getTime() + (expiredays*24*60*60*1000));
-      let expires = "expires=" + date.toGMTString();
-      document.cookie = cookingname + "=" + cookingvalue + ";" + expires + ";path=/";
-    }
-  
-    function getCookie(cookiename) {
-      let cookedname = cookiename + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
-      for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-        }
-        if (c.indexOf(cookedname) == 0) {
-          return c.substring(cookedname.length, c.length);
-        }
+     //I learned this from W3 Schools tutorials, check them out!
+      function setCookie(cookingname,cookingvalue,expiredays) {
+        const date = new Date();
+        date.setTime(date.getTime() + (expiredays*24*60*60*1000));
+        let expires = "expires=" + date.toGMTString();
+        document.cookie = cookingname + "=" + cookingvalue + ";" + expires + ";path=/";
       }
-      return "";
-    }
+  
+      function getCookie(cookiename) {
+        let cookedname = cookiename + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(cookedname) == 0) {
+            return c.substring(cookedname.length, c.length);
+          }
+        }
+        return "";
+      }
 
-    function checkNum() {
-      let name = getCookie("DieValue");
-      if (name != "") {
-        if (name == 0) {
-          document.getElementById("die").innerHTML = "⚀";
-        } else if (name == 1) {
-          document.getElementById("die").innerHTML = "⚁";
-        } else if (name == 2) {
-          document.getElementById("die").innerHTML = "⚂";
-        } else if (name == 3) {
-          document.getElementById("die").innerHTML = "⚃";
-        } else if (name == 4) {
-          document.getElementById("die").innerHTML = "⚄";
-        } else if (name == 5) {
-          document.getElementById("die").innerHTML = "⚅";
-        }  
-      } else {
-           var name = Math.floor(Math.random() * 6);
-           setCookie("DieValue", name, 30);
-           if (name == 0) {
-             document.getElementById("die").innerHTML = "⚀";
-           } else if (name == 1) {
-             document.getElementById("die").innerHTML = "⚁";
-           } else if (name == 2) {
-             document.getElementById("die").innerHTML = "⚂";
+      function checkNum() {
+        let name = getCookie("DieValue");
+        if (name != "") {
+          if (name == 0) {
+            document.getElementById("die").innerHTML = "⚀";
+          } else if (name == 1) {
+            document.getElementById("die").innerHTML = "⚁";
+          } else if (name == 2) {
+            document.getElementById("die").innerHTML = "⚂";
           } else if (name == 3) {
             document.getElementById("die").innerHTML = "⚃";
           } else if (name == 4) {
             document.getElementById("die").innerHTML = "⚄";
           } else if (name == 5) {
             document.getElementById("die").innerHTML = "⚅";
+          }  
+        } else {
+             var name = Math.floor(Math.random() * 6);
+             setCookie("DieValue", name, 30);
+             if (name == 0) {
+               document.getElementById("die").innerHTML = "⚀";
+             } else if (name == 1) {
+               document.getElementById("die").innerHTML = "⚁";
+             } else if (name == 2) {
+               document.getElementById("die").innerHTML = "⚂";
+             } else if (name == 3) {
+               document.getElementById("die").innerHTML = "⚃";
+             } else if (name == 4) {
+               document.getElementById("die").innerHTML = "⚄";
+             } else if (name == 5) {
+               document.getElementById("die").innerHTML = "⚅";
+             }
+           }
+         }
+       }
+      function dieRoll() {
+          var num = Math.floor(Math.random() * 6);
+          setCookie("DieValue", num, 30);
+          if (num == 0) {
+            document.getElementById("die").innerHTML = "⚀";
+          } else if (num == 1) {
+            document.getElementById("die").innerHTML = "⚁";
+          } else if (num == 2) {
+            document.getElementById("die").innerHTML = "⚂";
+          } else if (num == 3) {
+            document.getElementById("die").innerHTML = "⚃";
+          } else if (num == 4) {
+            document.getElementById("die").innerHTML = "⚄";
+          } else if (num == 5) {
+            document.getElementById("die").innerHTML = "⚅";
           }
-        }
-      }
-    }
-    function dieRoll() {
-        var num = Math.floor(Math.random() * 6);
-        setCookie("DieValue", num, 30);
-        if (num == 0) {
-          document.getElementById("die").innerHTML = "⚀";
-        } else if (num == 1) {
-          document.getElementById("die").innerHTML = "⚁";
-        } else if (num == 2) {
-          document.getElementById("die").innerHTML = "⚂";
-        } else if (num == 3) {
-          document.getElementById("die").innerHTML = "⚃";
-        } else if (num == 4) {
-          document.getElementById("die").innerHTML = "⚄";
-        } else if (num == 5) {
-          document.getElementById("die").innerHTML = "⚅";
-        }
       }
     </script>
   </body>
