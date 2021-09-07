@@ -4,6 +4,16 @@
     <title>General JS, HTML, CSS Tests</title>
   </head>
   <body>
+    <audio id="thereWasAReasonForRRoll">
+      <source src="https://cpucat.github.io/rroll.mp3" type="audio/mpeg">
+    Your Browser will not support RICKROLL.
+    </audio>
+    <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
+    <br>
+    <br>
+    <br>
+    <img onmouseover="playAudio()" src="https://cpucat.github.io/images/dont_touch_img.gif" alt="Smiley">
+    
     <script>
       var pOnMouseOver = document.getElementById("mouseOverOutSimplep");
       var RRollContainer = document.getElementById("thereWasAReasonForRRoll");
@@ -18,14 +28,6 @@
         RRollContainer.play();
       }
     </script>
-    <audio id="thereWasAReasonForRRoll">
-      <source src="https://cpucat.github.io/rroll.mp3" type="audio/mpeg">
-    Your Browser will not support RICKROLL.
-    </audio>
-    <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
-    <br>
-    <br>
-    <br>
-    <img onmouseover="playAudio()" src="https://cpucat.github.io/images/dont_touch_img.gif" alt="Smiley">
+    
   </body>
 </html>
