@@ -3,7 +3,7 @@ body {
   background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
 }
 h2 {
-  color: grey;
+  color: black;
   text-shadow: 2px 4px 2px white;
 }
 h1 {
