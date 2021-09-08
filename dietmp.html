@@ -30,7 +30,14 @@
     <br>
     <br>
     <br>
-    <br>
+    <br onload="checkName()">
     <marquee><a href="https://cpucat.github.io">Home</a></marquee>
+    <script>
+      function checkName() {
+        let name = getCookie("username");
+        if (name != "") {
+          document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+        } 
+    </script>
   </body>
 </html>
