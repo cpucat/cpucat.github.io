@@ -57,9 +57,25 @@
         return "";
       }
 
+      function DiceUpdate(cookie) {
+        if (cookie == 0) {
+             document.getElementById("die").innerHTML = "⚀";
+           } else if (cookie == 1) {
+             document.getElementById("die").innerHTML = "⚁";
+           } else if (cookie == 2) {
+             document.getElementById("die").innerHTML = "⚂";
+           } else if (cookie == 3) {
+             document.getElementById("die").innerHTML = "⚃";
+           } else if (cookie == 4) {
+             document.getElementById("die").innerHTML = "⚄";
+           } else if (cookie == 5) {
+             document.getElementById("die").innerHTML = "⚅";
+           } 
+      }
       
       function checkName() {
       let name = getCookie("username");
+      let die = getCookie("DieLastRoll");
       if (name != "") {
         document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
       } else {
@@ -67,6 +83,15 @@
          if (name != "" && name != null) {
            setCookie("username", name, 30);
            document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+         }
+      }
+      if (die != "") {
+        DiceUpdate(die);
+      } else {
+         var died = Math.floor(Math.random() * 6);
+         if (name != "" && name != null) {
+           setCookie("DieLastRoll", died, 30);
+           DiceUpdate(died);
          }
       }
     }
