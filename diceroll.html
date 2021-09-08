@@ -6,7 +6,7 @@
   </head>
   <body onload="checkName()">
     <h1>Die Rolling Simulator</h1>
-    <button type="button" onclick="dieRoll()">Click to roll the die</button>
+    <button id="buttongreeting" type="button" onclick="dieRoll()">Click to roll the die</button>
     <script>
       function dieRoll() {
           var num = Math.floor(Math.random() * 6);
@@ -78,7 +78,7 @@
       let name = getCookie("username");
       let die = getCookie("DieLastRoll");
       if (name != "") {
-        document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+        document.getElementById("buttongreeting").innerHTML = name + ", click this button to roll the die!";
       } else {
          name = prompt("Please enter your name for custom greetings:","");
          if (name != "" && name != null) {
