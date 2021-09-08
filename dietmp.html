@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dice Roll Testing Editor</title>
+    <link rel="stylesheet" href="https://cpucat.github.io/Style/DiceRoll.css">
+  </head>
+  <body>
+    <h1>Die Rolling Simulator</h1>
+    <button type="button" onclick="dieRoll()">Click to roll the die</button>
+    <script>
+      function dieRoll() {
+          var num = Math.floor(Math.random() * 6);
+          if (num == 0) {
+            document.getElementById("die").innerHTML = "⚀";
+          } else if (num == 1) {
+            document.getElementById("die").innerHTML = "⚁";
+          } else if (num == 2) {
+            document.getElementById("die").innerHTML = "⚂";
+          } else if (num == 3) {
+            document.getElementById("die").innerHTML = "⚃";
+          } else if (num == 4) {
+            document.getElementById("die").innerHTML = "⚄";
+          } else if (num == 5) {
+            document.getElementById("die").innerHTML = "⚅";
+          }
+      }
+      dieRoll();
+    </script>
+    <p id="die">error</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <marquee><a href="https://cpucat.github.io">Home</a></marquee>
+  </body>
+</html>
