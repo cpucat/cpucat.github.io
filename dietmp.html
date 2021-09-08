@@ -4,7 +4,7 @@
     <title>Dice Roll Testing Editor</title>
     <link rel="stylesheet" href="https://cpucat.github.io/Style/DiceRoll.css">
   </head>
-  <body>
+  <body onload="checkName()">
     <h1>Die Rolling Simulator</h1>
     <button type="button" onclick="dieRoll()">Click to roll the die</button>
     <script>
@@ -24,14 +24,14 @@
             document.getElementById("die").innerHTML = "⚅";
           }
       }
-      dieRoll();
+   
     </script>
     <p id="nameGreeting">No pls</p>
     <p id="die">error</p>
     <br>
     <br>
     <br>
-    <br onload="checkName()">
+    <br>
     <marquee><a href="https://cpucat.github.io">Home</a></marquee>
     <script>
       function setCookie(cookingname, cookingvalue, expiredays) {
@@ -59,10 +59,17 @@
 
       
       function checkName() {
-        let name = getCookie("username");
-        if (name != "") {
-          document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
-        } 
+      let name = getCookie("username");
+      if (name != "") {
+        document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+      } else {
+         name = prompt("Please enter your name for custom greetings:","");
+         if (name != "" && name != null) {
+           setCookie("username", name, 30);
+           document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+         }
+      }
+    }
     </script>
   </body>
 </html>
