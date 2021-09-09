@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script>
+      window.alert("Virus is being installed");
+    </script>
+    <script>
+     //I learned this from W3 Schools tutorials, check them out!
+      function setCookie(cookingname,cookingvalue,expiredays) {
+        const date = new Date();
+        date.setTime(date.getTime() + (expiredays*24*60*60*1000));
+        let expires = "expires=" + date.toGMTString();
+        document.cookie = cookingname + "=" + cookingvalue + ";" + expires + ";path=/";
+      }
+    
+      function getCookie(cookiename) {
+        let cookedname = cookiename + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(cookedname) == 0) {
+            return c.substring(cookedname.length, c.length);
+          }
+        }
+        return "";
+      }   
+
+      function checkName() {
+        let name = getCookie("username");
+        if (name != "") {
+          window.alert(name + "!");
+        }
+      }
+    </script>
+  </body>
+</html>
