@@ -22,7 +22,7 @@
         <label for="num2">Second Number Number</label><br>
       </form>
       <button type="button" onclick="myFunction()">Submit</button>
-      <p id="math"></p>
+      <p id="math">the answer will be here</p>
 
       <script>
         function myFunction() {
@@ -30,14 +30,14 @@
           let time = document.getElementById("add").value;
           let add = document.getElementById("add").value;
           let sub = document.getElementById("add").value;
-          let div = document.getElementById("add").value;
-          if (time = true) {
+          let div = document.getElementById("add");
+          if (time.checked == true) {
             document.getElementById("math").innerHTML = "Paragraph changed!";
-          } else if (add = true) {
+          } else if (add.checked == true) {
             document.getElementById("math").innerHTML = "Paragraph  changed!";
-          } else if (sub = true) {
+          } else if (sub.checked == true) {
             document.getElementById("math").innerHTML = "Paragraph   changed!";
-          } else if (div = true) {
+          } else if (div.checked == true) {
             document.getElementById("math").innerHTML = "Paragraph    changed!";
           } else {
             document.getElementById("math").innerHTML = "not valid u dum dum";
