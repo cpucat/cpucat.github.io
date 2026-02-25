@@ -10,7 +10,7 @@ body {
   height: 60px;
 }
 
-#mainContent {
+#mainWrapper {
     width: 90%;
     margin:auto;
     background-color: white;
