@@ -5,16 +5,16 @@ body {
 }
 
 #header {
-
+  height: 30px;
 }
 
 #footer {
-
+  height: 60px;
 }
 
 #mainContent {
     position: center;
     width: 90%;
-    height: 90%;
+    margin:auto;
     background-color: white;
 }
