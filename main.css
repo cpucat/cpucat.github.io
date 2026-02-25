@@ -3,19 +3,21 @@ body {
 }
 
 #header {
-  height: 30px;
+  height: 3%;
 }
 
 #footer {
-  height: 60px;
+  height: 7%;
 }
 
 #mainWrapper {
     width: 90%;
+    height: 90%;
     margin:auto;
     background-color: white;
 }
 
 #mainContent {
     margin:auto;
+    overflow: auto;
 }
