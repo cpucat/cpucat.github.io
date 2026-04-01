@@ -1,5 +1,6 @@
 body {
-  background-color: lightblue;
+  background: url('https://cpucat.github.io/backgroundtile.gif') center center repeat;
+  background-size: 2em;
 }
 
 #header {
