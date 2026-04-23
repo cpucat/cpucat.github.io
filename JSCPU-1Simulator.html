@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <title>CPU-1 Simulator</title>
+      <link rel="stylesheet" href="http://cpuc.at/main.css">
+  </head>
+  <body>
+    <div id="mainWrapper">
+      <div id="mainContent">
+        <p><a href="/" download>Back to Main</a></p>
+        <h1>CPU-1 Simulator</h1>
+        <p>Accumulator:</p>
+        <p id="accumulatorDisplay">░░░░░</p>
+        <br>
+        <p>HALT:</p>
+        <p id="haltLight">░</p>
+        <p>SKIP:</p>
+        <p id="skipLight">░</p>
+        <br>
+        <form>
+            <label>Instruction:</label>
+            <input type="checkbox" id="instruction1Box">
+            <input type="checkbox" id="instruction2Box">
+            <input type="checkbox" id="instruction3Box">
+            <input type="checkbox" id="instruction4Box">
+            <br>
+            <label>Data:</label>
+            <input type="checkbox" id="data1Box">
+            <input type="checkbox" id="data2Box">
+            <input type="checkbox" id="data3Box">
+            <input type="checkbox" id="data4Box">
+            <input type="checkbox" id="data5Box">
+        </form>
+
+        <br>
+
+        <input type="button" id="GO" value="GO (Clears HALT)">
+        <input type="button" id="CLK" value="CLOCK">
+        <input type="button" id="RESET" value="RESET">
+
+        <br>
+        <br>
+
+        <!--BEHOLD! MY HUGE TABLE OF GARBAGE!-->
+        <h1>Opcode List</h1>
+        <table>
+          <tr>
+            <th>Bin</th>
+            <th>Hex</th>
+            <th>Mnemonic</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>0000</td>
+            <td>0</td>
+            <td>NOP</td>
+            <td>Does Nothing</td>
+          </tr>
+          <tr>
+            <td>0001</td>
+            <td>1</td>
+            <td>NAND</td>
+            <td>A = A NAND DATA</td>
+          </tr>
+          <tr>
+            <td>0010</td>
+            <td>2</td>
+            <td>AND</td>
+            <td>A = A AND DATA</td>
+          </tr>
+          <tr>
+            <td>0011</td>
+            <td>3</td>
+            <td>XOR</td>
+            <td>A = A XOR DATA</td>
+          </tr>
+          <tr>
+            <td>0100</td>
+            <td>4</td>
+            <td>OR</td>
+            <td>A = A OR DATA</td>
+          </tr>
+          <tr>
+            <td>0101</td>
+            <td>5</td>
+            <td>TR</td>
+            <td>A = DATA</td>
+          </tr>
+          <tr>
+            <td>0110</td>
+            <td>6</td>
+            <td>SKIP A=D</td>
+            <td>Skips next instruction if A = DATA</td>
+          </tr>
+          <tr>
+            <td>0111</td>
+            <td>7</td>
+            <td>ADD</td>
+            <td>A = A + DATA</td>
+          </tr>
+          <tr>
+            <td>1000</td>
+            <td>8</td>
+            <td>SUB</td>
+            <td>A = A - DATA</td>
+          </tr>
+          <tr>
+            <td>1001</td>
+            <td>9</td>
+            <td>NOT</td>
+            <td>A = !A</td>
+          </tr>
+          <tr>
+            <td>1010</td>
+            <td>A</td>
+            <td>STO A, $D</td>
+            <td>Loads A into the address pointed to by DATA (Currently not in Simulator)</td>
+          </tr>
+          <tr>
+            <td>1011</td>
+            <td>B</td>
+            <td>LD $D, A</td>
+            <td>Loads the value in the address pointed to by DATA into A (Currently not in Simulator)</td>
+          </tr>
+          <tr>
+            <td>1100</td>
+            <td>C</td>
+            <td>SKIP A!=D</td>
+            <td>Skips next instruction if A != DATA</td>
+          </tr>
+          <tr>
+            <td>1101</td>
+            <td>D</td>
+            <td>LD A, PC</td>
+            <td>Loads A into the Program Counter (Currently not in Simulator)</td>
+          </tr>
+          <tr>
+            <td>1110</td>
+            <td>E</td>
+            <td>ROT A</td>
+            <td>Rotates the bits in A to the right (LSB -> MSB)</td>
+          </tr>
+          <tr>
+            <td>1111</td>
+            <td>F</td>
+            <td>HALT</td>
+            <td>Stops any more instructions from being executed</td>
+          </tr>
+        </table>
+
+        <br>
+
+        <p><img src="/images/CPU-1-LogisimExport.png" alt="Logisim Diagram of this computer" style="float:right;">The LogiSim version of this computer is available for download <a href="/files/CPU-1-Logisim.circ" download>here.</a></p>
+
+        <script>
+            //░ for 0, ▓ for 1.
+            const accumulatorDisplay = document.getElementById("accumulatorDisplay");
+            const haltLight = document.getElementById("haltLight");
+            const skipLight = document.getElementById("skipLight");
+
+
+            const instruction1in = document.getElementById("instruction1Box");
+            const instruction2in = document.getElementById("instruction2Box");
+            const instruction3in = document.getElementById("instruction3Box");
+            const instruction4in = document.getElementById("instruction4Box");
+
+            const data1in = document.getElementById("data1Box");
+            const data2in = document.getElementById("data2Box");
+            const data3in = document.getElementById("data3Box");
+            const data4in = document.getElementById("data4Box");
+            const data5in = document.getElementById("data5Box");
+
+            var accumulator1 = 0;
+            var accumulator2 = 0;
+            var accumulator3 = 0;
+            var accumulator4 = 0;
+            var accumulator5 = 0;
+
+            var skipNextCycle = 0;
+
+            var skip = 0;
+            var halt = 0;
+
+            function updateBlinkenLights(a, b, c, d, e, h, s) { // Function that updates the light displays
+                var text = "";
+                if (a == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+                if (b == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+                if (c == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+                if (d == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+                if (e == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+
+                accumulatorDisplay.innerHTML = text;
+
+                text = "";
+                if (halt == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+
+                haltLight.innerHTML = text;
+
+                text = "";
+                if (skip == 1) {
+                    text += "▓";
+                } else {
+                    text += "░";
+                }
+
+                skipLight.innerHTML = text;
+            }
+
+            document.getElementById("CLK").onclick = function() {
+
+                if (halt) {
+                    return;
+                }
+                if (skipNextCycle) {
+                    skipNextCycle = 0;
+                    skip = 1;
+                    updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
+                    return
+                }
+
+                skip = 0;
+
+                 var currentOperation = (instruction1in.checked * 8) + (instruction2in.checked * 4) + (instruction3in.checked * 2) + (instruction4in.checked * 1);
+
+                 switch (currentOperation) {
+                   case 0: // No operation
+                   default:
+                     break;
+                   case 1: // NAND
+                     accumulator1 = !(accumulator1 & data1in.checked);
+                     accumulator2 = !(accumulator2 & data2in.checked);
+                     accumulator3 = !(accumulator3 & data3in.checked);
+                     accumulator4 = !(accumulator4 & data4in.checked);
+                     accumulator5 = !(accumulator5 & data5in.checked);
+                     break;
+                   case 2: // AND
+                     accumulator1 = accumulator1 & data1in.checked;
+                     accumulator2 = accumulator2 & data2in.checked;
+                     accumulator3 = accumulator3 & data3in.checked;
+                     accumulator4 = accumulator4 & data4in.checked;
+                     accumulator5 = accumulator5 & data5in.checked;
+                     break;
+                   case 3: // XOR
+                     accumulator1 = accumulator1 != data1in.checked;
+                     accumulator2 = accumulator2 != data2in.checked;
+                     accumulator3 = accumulator3 != data3in.checked;
+                     accumulator4 = accumulator4 != data4in.checked;
+                     accumulator5 = accumulator5 != data5in.checked;
+                     break;
+                   case 4: // OR
+                     accumulator1 = accumulator1 | data1in.checked;
+                     accumulator2 = accumulator2 | data2in.checked;
+                     accumulator3 = accumulator3 | data3in.checked;
+                     accumulator4 = accumulator4 | data4in.checked;
+                     accumulator5 = accumulator5 | data5in.checked;
+                     break;
+                   case 5: // TRANSFER
+                     accumulator1 = data1in.checked;
+                     accumulator2 = data2in.checked;
+                     accumulator3 = data3in.checked;
+                     accumulator4 = data4in.checked;
+                     accumulator5 = data5in.checked;
+                     break;
+                   case 6: // SKIP IF A=DATA
+                     if ((accumulator1 == data1in.checked) || (accumulator2 == data2in.checked) || (accumulator3 == data3in.checked) || (accumulator4 == data4in.checked) || (accumulator5 == data5in.checked)) {
+                         skipNextCycle = 1;
+                     }
+                     break;
+                   case 7: // ADD A + DATA
+                   case 8: // SUBTRACT A - DATA
+                     // Convert to DEC
+
+                     var accumulatorDec = (accumulator1 * 16) + (accumulator2 * 8) + (accumulator3 * 4) + (accumulator4 * 2) + (accumulator5 * 1);
+                     var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
+
+                     console.log(accumulatorDec);
+                     console.log(dataDec);
+
+
+                     var holderForMath = 0;
+
+                     if (currentOperation == 7) {
+                         holderForMath = accumulatorDec + dataDec;
+                     } else {
+                         holderForMath = accumulatorDec - dataDec;
+                     }
+
+                     if (holderForMath < 0) {
+                         holderForMath += 32;
+                     }
+
+                     // Convert back to BIN
+                     var BinaryString = Number(holderForMath).toString(2);
+
+                     console.log(holderForMath);
+
+                     console.log(BinaryString);
+
+                     // There's probably a better way to do this but this is my first JS project in literal years
+                     switch (BinaryString.length) {
+                       case 6:
+                       case 5:
+                         accumulator1 = parseInt(BinaryString[0]);
+                         accumulator2 = parseInt(BinaryString[1]);
+                         accumulator3 = parseInt(BinaryString[2]);
+                         accumulator4 = parseInt(BinaryString[3]);
+                         accumulator5 = parseInt(BinaryString[4]);
+                         break;
+                       case 4:
+                         accumulator1 = 0;
+                         accumulator2 = parseInt(BinaryString[0]);
+                         accumulator3 = parseInt(BinaryString[1]);
+                         accumulator4 = parseInt(BinaryString[2]);
+                         accumulator5 = parseInt(BinaryString[3]);
+                         break;
+                       case 3:
+                         accumulator1 = 0;
+                         accumulator2 = 0;
+                         accumulator3 = parseInt(BinaryString[0]);
+                         accumulator4 = parseInt(BinaryString[1]);
+                         accumulator5 = parseInt(BinaryString[2]);
+                         break;
+                       case 2:
+                         accumulator1 = 0;
+                         accumulator2 = 0;
+                         accumulator3 = 0;
+                         accumulator4 = parseInt(BinaryString[0]);
+                         accumulator5 = parseInt(BinaryString[1]);
+                         break;
+                       case 1:
+                         accumulator1 = 0;
+                         accumulator2 = 0;
+                         accumulator3 = 0;
+                         accumulator4 = 0;
+                         accumulator5 = parseInt(BinaryString[0]);
+                         break;
+                       case 0:
+                         accumulator1 = 0;
+                         accumulator2 = 0;
+                         accumulator3 = 0;
+                         accumulator4 = 0;
+                         accumulator5 = 0;
+                         break;
+                       default:
+                         throw new Error("Dec to Bin Failure");
+                         break;
+
+                     }
+
+                     break;
+                   case 9: // NOT A
+                     accumulator1 = !accumulator1;
+                     accumulator2 = !accumulator2;
+                     accumulator3 = !accumulator3;
+                     accumulator4 = !accumulator4;
+                     accumulator5 = !accumulator5;
+                     break;
+                   case 10: // STORE A INTO $DATA
+                     break;
+                   case 11:  // LOAD $DATA INTO A
+                     break;
+                   case 12: // SKIP IF A!= DATA
+                     if ((accumulator1 != data1in.checked) || (accumulator2 != data2in.checked) || (accumulator3 != data3in.checked) || (accumulator4 != data4in.checked) || (accumulator5 != data5in.checked)) {
+                         skipNextCycle = 1;
+                     }
+                     break;
+                   case 13: // LOAD DATA INTO PROGRAM COUNTER
+                     break;
+                   case 14: // ROR A
+                     var temporaryVar = accumulator5;
+                     accumulator5 = accumulator4;
+                     accumulator4 = accumulator3;
+                     accumulator3 = accumulator2;
+                     accumulator2 = accumulator1;
+                     accumulator1 = temporaryVar;
+                     break;
+                   case 15:
+                     halt = 1;
+                     break;
+
+                }
+
+                updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
+            }
+
+            document.getElementById("RESET").onclick = function() {
+                accumulator5 = accumulator4 = accumulator3 = accumulator2 = accumulator1 = 0;
+                skip = halt = 0;
+
+                updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
+            }
+
+            document.getElementById("GO").onclick = function() {
+                halt = 0;
+                updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
+            }
+
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
