@@ -18,6 +18,26 @@
         <p>SKIP:</p>
         <p id="skipLight">░</p>
         <br>
+        <table>
+          <tr>
+            <th>
+            <p>Ram view (Hex):</p>
+            </th>
+          </tr>
+          <tr>
+            <th>
+            <textarea id="rDisplay" style="resize: none; overflow: hidden;" rows="4" cols="20" disabled>
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+            </textarea>
+            </th>
+
+          </tr>
+        </table>
+        <br><br>
+
         <form>
             <label>Instruction:</label>
             <input type="checkbox" id="instruction1Box">
@@ -32,6 +52,8 @@
             <input type="checkbox" id="data4Box">
             <input type="checkbox" id="data5Box">
         </form>
+
+
 
         <br>
 
@@ -115,19 +137,7 @@
             <td>1010</td>
             <td>A</td>
             <td>STO A, $D</td>
-            <td>Loads A into the address pointed to by DATA (Currently not in Simulator)</td>
-          </tr>
-          <tr>
-            <td>1011</td>
-            <td>B</td>
-            <td>LD $D, A</td>
-            <td>Loads the value in the address pointed to by DATA into A (Currently not in Simulator)</td>
-          </tr>
-          <tr>
-            <td>1100</td>
-            <td>C</td>
-            <td>SKIP A!=D</td>
-            <td>Skips next instruction if A != DATA</td>
+            <td>Loads A into the address pointed to by DATA</td>
           </tr>
           <tr>
             <td>1101</td>
@@ -155,6 +165,8 @@
         <br>
         <p>The instruction with opcode 1101 (LD A, PC) is not required for implementation, as this processor was designed to be able to be used with a paper tape reader for simpler operation via the SKIP instructions.</p>
         <p>This processor's opcode list was inspired by the Intel 4004 and UE-1.</p>
+        <p>The odd data length (5 bits) was chosen for the ability to display baudot code.</p>
+
         <script>
             //░ for 0, ▓ for 1.
             const accumulatorDisplay = document.getElementById("accumulatorDisplay");
@@ -173,6 +185,8 @@
             const data4in = document.getElementById("data4Box");
             const data5in = document.getElementById("data5Box");
 
+            const ramDisplay = document.getElementById("rDisplay");
+
             var accumulator1 = 0;
             var accumulator2 = 0;
             var accumulator3 = 0;
@@ -183,6 +197,107 @@
 
             var skip = 0;
             var halt = 0;
+
+            const computerRAM = new Array(32);
+
+            for (var i = 0; i < 32; i++) {
+                computerRAM[i] = 0;
+            }
+
+
+            // also this function sucks but all my brain went into the simulator (and cpu) so womp womp
+            function crappyDec2Hex(number) {
+                switch (number){
+                  case 0:
+                    return "00";
+                  case 1:
+                    return "01";
+                  case 2:
+                    return "02";
+                  case 3:
+                    return "03";
+                  case 4:
+                    return "04";
+                  case 5:
+                    return "05";
+                  case 6:
+                    return "06";
+                  case 7:
+                    return "07";
+                  case 8:
+                    return "08";
+                  case 9:
+                    return "09";
+                  case 10:
+                    return "0A";
+                  case 11:
+                    return "0B";
+                  case 12:
+                    return "0C";
+                  case 13:
+                    return "0D";
+                  case 14:
+                    return "0E";
+                  case 15:
+                    return "0F";
+                  case 16:
+                    return "10";
+                  case 17:
+                    return "11";
+                  case 18:
+                    return "12";
+                  case 19:
+                    return "13";
+                  case 20:
+                    return "14";
+                  case 21:
+                    return "15";
+                  case 22:
+                    return "16";
+                  case 23:
+                    return "17";
+                  case 24:
+                    return "18";
+                  case 25:
+                    return "19";
+                  case 26:
+                    return "1A";
+                  case 27:
+                    return "1B";
+                  case 28:
+                    return "1C";
+                  case 29:
+                    return "1D";
+                  case 30:
+                    return "1E";
+                  case 31:
+                    return "1F"; // Function ends here because 5-bit numbers
+                  default:
+                    return "NaN";
+                }
+
+            }
+
+            function updateRamDisplay() {
+                var newText = "";
+
+                var currentCell = 0;
+
+                for (var i = 0; i < 5; i++) {
+                    for (var o = 0; o < 8; o++) {
+                        if (o == 0) {
+                            newText = newText + crappyDec2Hex(computerRAM[currentCell]);
+                        } else {
+                            newText = newText + " " + crappyDec2Hex(computerRAM[currentCell]);
+                        }
+
+                        currentCell++;
+                    }
+                    newText = newText + "\n";
+                }
+
+                ramDisplay.value = newText;
+            }
 
             function updateBlinkenLights(a, b, c, d, e, h, s) { // Function that updates the light displays
                 var text = "";
@@ -231,6 +346,59 @@
                 }
 
                 skipLight.innerHTML = text;
+            }
+
+            function crappyDec2Bin(BinaryString) {
+
+                switch (BinaryString.length) {
+                    case 6:
+                    case 5:
+                      accumulator1 = parseInt(BinaryString[0]);
+                      accumulator2 = parseInt(BinaryString[1]);
+                      accumulator3 = parseInt(BinaryString[2]);
+                      accumulator4 = parseInt(BinaryString[3]);
+                      accumulator5 = parseInt(BinaryString[4]);
+                      break;
+                    case 4:
+                      accumulator1 = 0;
+                      accumulator2 = parseInt(BinaryString[0]);
+                      accumulator3 = parseInt(BinaryString[1]);
+                      accumulator4 = parseInt(BinaryString[2]);
+                      accumulator5 = parseInt(BinaryString[3]);
+                      break;
+                    case 3:
+                      accumulator1 = 0;
+                      accumulator2 = 0;
+                      accumulator3 = parseInt(BinaryString[0]);
+                      accumulator4 = parseInt(BinaryString[1]);
+                      accumulator5 = parseInt(BinaryString[2]);
+                      break;
+                    case 2:
+                      accumulator1 = 0;
+                      accumulator2 = 0;
+                      accumulator3 = 0;
+                      accumulator4 = parseInt(BinaryString[0]);
+                      accumulator5 = parseInt(BinaryString[1]);
+                      break;
+                    case 1:
+                      accumulator1 = 0;
+                      accumulator2 = 0;
+                      accumulator3 = 0;
+                      accumulator4 = 0;
+                      accumulator5 = parseInt(BinaryString[0]);
+                      break;
+                    case 0:
+                      accumulator1 = 0;
+                      accumulator2 = 0;
+                      accumulator3 = 0;
+                      accumulator4 = 0;
+                      accumulator5 = 0;
+                      break;
+                    default:
+                      throw new Error("Dec to Bin Failure");
+                      break;
+                  }
+                return;
             }
 
             document.getElementById("CLK").onclick = function() {
@@ -300,10 +468,6 @@
                      var accumulatorDec = (accumulator1 * 16) + (accumulator2 * 8) + (accumulator3 * 4) + (accumulator4 * 2) + (accumulator5 * 1);
                      var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
 
-                     console.log(accumulatorDec);
-                     console.log(dataDec);
-
-
                      var holderForMath = 0;
 
                      if (currentOperation == 7) {
@@ -318,61 +482,7 @@
 
                      // Convert back to BIN
                      var BinaryString = Number(holderForMath).toString(2);
-
-                     console.log(holderForMath);
-
-                     console.log(BinaryString);
-
-                     // There's probably a better way to do this but this is my first JS project in literal years
-                     switch (BinaryString.length) {
-                       case 6:
-                       case 5:
-                         accumulator1 = parseInt(BinaryString[0]);
-                         accumulator2 = parseInt(BinaryString[1]);
-                         accumulator3 = parseInt(BinaryString[2]);
-                         accumulator4 = parseInt(BinaryString[3]);
-                         accumulator5 = parseInt(BinaryString[4]);
-                         break;
-                       case 4:
-                         accumulator1 = 0;
-                         accumulator2 = parseInt(BinaryString[0]);
-                         accumulator3 = parseInt(BinaryString[1]);
-                         accumulator4 = parseInt(BinaryString[2]);
-                         accumulator5 = parseInt(BinaryString[3]);
-                         break;
-                       case 3:
-                         accumulator1 = 0;
-                         accumulator2 = 0;
-                         accumulator3 = parseInt(BinaryString[0]);
-                         accumulator4 = parseInt(BinaryString[1]);
-                         accumulator5 = parseInt(BinaryString[2]);
-                         break;
-                       case 2:
-                         accumulator1 = 0;
-                         accumulator2 = 0;
-                         accumulator3 = 0;
-                         accumulator4 = parseInt(BinaryString[0]);
-                         accumulator5 = parseInt(BinaryString[1]);
-                         break;
-                       case 1:
-                         accumulator1 = 0;
-                         accumulator2 = 0;
-                         accumulator3 = 0;
-                         accumulator4 = 0;
-                         accumulator5 = parseInt(BinaryString[0]);
-                         break;
-                       case 0:
-                         accumulator1 = 0;
-                         accumulator2 = 0;
-                         accumulator3 = 0;
-                         accumulator4 = 0;
-                         accumulator5 = 0;
-                         break;
-                       default:
-                         throw new Error("Dec to Bin Failure");
-                         break;
-
-                     }
+                     crappyDec2Bin(BinaryString);
 
                      break;
                    case 9: // NOT A
@@ -383,8 +493,20 @@
                      accumulator5 = !accumulator5;
                      break;
                    case 10: // STORE A INTO $DATA
+                     // Convert to Decimal
+                     var accumulatorDec = (accumulator1 * 16) + (accumulator2 * 8) + (accumulator3 * 4) + (accumulator4 * 2) + (accumulator5 * 1);
+                     var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
+
+                     computerRAM[dataDec] = accumulatorDec; // Store in the big array
+
+                     updateRamDisplay();
+
                      break;
                    case 11:  // LOAD $DATA INTO A
+                     var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
+
+                     var BinaryString = Number(computerRAM[dataDec]).toString(2);
+                     crappyDec2Bin(BinaryString);
                      break;
                    case 12: // SKIP IF A!= DATA
                      if ((accumulator1 != data1in.checked) || (accumulator2 != data2in.checked) || (accumulator3 != data3in.checked) || (accumulator4 != data4in.checked) || (accumulator5 != data5in.checked)) {
