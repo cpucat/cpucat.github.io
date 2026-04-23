@@ -23,6 +23,20 @@
             <th>
             <p>Ram view (Hex):</p>
             </th>
+
+            <th>
+            <p>Data entry (Hex):</p>
+            </th>
+
+
+            <th>
+            <p>Opcode entry (Hex):</p>
+            </th>
+
+            <th>
+            <p>Program Counter / Autorun</p>
+            </th>
+
           </tr>
           <tr>
             <th>
@@ -33,7 +47,27 @@
 00 00 00 00 00 00 00 00
             </textarea>
             </th>
-
+            <th>
+                <form>
+                    <select class="form-control"  id='userData0' onChange="updateUserData()"></select><select class="form-control"  id='userData1' onChange="updateUserData()"></select><select class="form-control"  id='userData2' onChange="updateUserData()"></select><select class="form-control"  id='userData3' onChange="updateUserData()"></select><select class="form-control"  id='userData4' onChange="updateUserData()"></select><select class="form-control"  id='userData5' onChange="updateUserData()"></select><select class="form-control"  id='userData6' onChange="updateUserData()"></select><select class="form-control"  id='userData7' onChange="updateUserData()"></select><br>
+                    <select class="form-control"  id='userData8' onChange="updateUserData()"></select><select class="form-control"  id='userData9' onChange="updateUserData()"></select><select class="form-control"  id='userData10' onChange="updateUserData()"></select><select class="form-control"  id='userData11' onChange="updateUserData()"></select><select class="form-control"  id='userData12' onChange="updateUserData()"></select><select class="form-control"  id='userData13' onChange="updateUserData()"></select><select class="form-control"  id='userData14' onChange="updateUserData()"></select><select class="form-control"  id='userData15' onChange="updateUserData()"></select><br>
+                    <select class="form-control"  id='userData16' onChange="updateUserData()"></select><select class="form-control"  id='userData17' onChange="updateUserData()"></select><select class="form-control"  id='userData18' onChange="updateUserData()"></select><select class="form-control"  id='userData19' onChange="updateUserData()"></select><select class="form-control"  id='userData20' onChange="updateUserData()"></select><select class="form-control"  id='userData21' onChange="updateUserData()"></select><select class="form-control"  id='userData22' onChange="updateUserData()"></select><select class="form-control"  id='userData23' onChange="updateUserData()"></select><br>
+                    <select class="form-control"  id='userData24' onChange="updateUserData()"></select><select class="form-control"  id='userData25' onChange="updateUserData()"></select><select class="form-control"  id='userData26' onChange="updateUserData()"></select><select class="form-control"  id='userData27' onChange="updateUserData()"></select><select class="form-control"  id='userData28' onChange="updateUserData()"></select><select class="form-control"  id='userData29' onChange="updateUserData()"></select><select class="form-control"  id='userData30' onChange="updateUserData()"></select><select class="form-control"  id='userData31' onChange="updateUserData()"></select>
+                </form>
+            </th>
+            <th>
+                <form>
+                    <select class="form-control"  id='userOpcode0' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode1' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode2' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode3' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode4' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode5' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode6' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode7' onChange="updateUserOpcode()"></select><br>
+                    <select class="form-control"  id='userOpcode8' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode9' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode10' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode11' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode12' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode13' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode14' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode15' onChange="updateUserOpcode()"></select><br>
+                    <select class="form-control"  id='userOpcode16' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode17' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode18' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode19' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode20' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode21' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode22' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode23' onChange="updateUserOpcode()"></select><br>
+                    <select class="form-control"  id='userOpcode24' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode25' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode26' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode27' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode28' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode29' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode30' onChange="updateUserOpcode()"></select><select class="form-control"  id='userOpcode31' onChange="updateUserOpcode()"></select>
+                </form>
+            </th>
+            <th>
+              <p id="programInfoDisp">NOP 00</p>
+              <p id="pcDisp">00</p>
+              <input type="button" id="SingleStep" value="Single Step">
+            </th>
           </tr>
         </table>
         <br><br>
@@ -140,6 +174,18 @@
             <td>Loads A into the address pointed to by DATA</td>
           </tr>
           <tr>
+            <td>1100</td>
+            <td>B</td>
+            <td>LD $D, A</td>
+            <td>Loads the value in $DATA into the accumulator</td>
+          </tr>
+          <tr>
+            <td>1100</td>
+            <td>C</td>
+            <td>SKIP A != D</td>
+            <td>Skips next cycle if A != DATA</td>
+          </tr>
+          <tr>
             <td>1101</td>
             <td>D</td>
             <td>LD A, PC</td>
@@ -179,6 +225,9 @@
             const instruction3in = document.getElementById("instruction3Box");
             const instruction4in = document.getElementById("instruction4Box");
 
+            const programCounterDisplay = document.getElementById("pcDisp");
+            const programInfoDisplay = document.getElementById("programInfoDisp");
+
             const data1in = document.getElementById("data1Box");
             const data2in = document.getElementById("data2Box");
             const data3in = document.getElementById("data3Box");
@@ -198,84 +247,151 @@
             var skip = 0;
             var halt = 0;
 
+            var programCounter = 0;
+
             const computerRAM = new Array(32);
+            const userOpcodes = new Array(32);
+            const userData = new Array(32);
 
             for (var i = 0; i < 32; i++) {
                 computerRAM[i] = 0;
+                userOpcodes[i] = 0;
+                userData[i] = 0;
             }
 
+            const userDataBoxes = new Array(32);
 
-            // also this function sucks but all my brain went into the simulator (and cpu) so womp womp
+            for (var i = 0; i < 32; i++) {
+                userDataBoxes[i] = document.getElementById("userData" + i);
+                userDataBoxes[i].options[0] = new Option('00', '00');
+                userDataBoxes[i].options[1] = new Option('01', '01');
+                userDataBoxes[i].options[2] = new Option('02', '02');
+                userDataBoxes[i].options[3] = new Option('03', '03');
+                userDataBoxes[i].options[4] = new Option('04', '04');
+                userDataBoxes[i].options[5] = new Option('05', '05');
+                userDataBoxes[i].options[6] = new Option('06', '06');
+                userDataBoxes[i].options[7] = new Option('07', '07');
+                userDataBoxes[i].options[8] = new Option('08', '08');
+                userDataBoxes[i].options[9] = new Option('09', '09');
+                userDataBoxes[i].options[10] = new Option('0A', '10');
+                userDataBoxes[i].options[11] = new Option('0B', '11');
+                userDataBoxes[i].options[12] = new Option('0C', '12');
+                userDataBoxes[i].options[13] = new Option('0D', '13');
+                userDataBoxes[i].options[14] = new Option('0E', '14');
+                userDataBoxes[i].options[15] = new Option('0F', '15');
+                userDataBoxes[i].options[16] = new Option('10', '16');
+                userDataBoxes[i].options[17] = new Option('11', '17');
+                userDataBoxes[i].options[18] = new Option('12', '18');
+                userDataBoxes[i].options[19] = new Option('13', '19');
+                userDataBoxes[i].options[20] = new Option('14', '20');
+                userDataBoxes[i].options[21] = new Option('15', '21');
+                userDataBoxes[i].options[22] = new Option('16', '22');
+                userDataBoxes[i].options[23] = new Option('17', '23');
+                userDataBoxes[i].options[24] = new Option('18', '24');
+                userDataBoxes[i].options[25] = new Option('19', '25');
+                userDataBoxes[i].options[26] = new Option('1A', '26');
+                userDataBoxes[i].options[27] = new Option('1B', '27');
+                userDataBoxes[i].options[28] = new Option('1C', '28');
+                userDataBoxes[i].options[29] = new Option('1D', '29');
+                userDataBoxes[i].options[30] = new Option('1E', '30');
+                userDataBoxes[i].options[31] = new Option('1F', '31');
+            }
+
+            const userOpcodeBoxes = new Array(32);
+
+            for (var i = 0; i < 32; i++) {
+                userOpcodeBoxes[i] = document.getElementById("userOpcode" + i);
+                userOpcodeBoxes[i].options[0] = new Option('0', '00');
+                userOpcodeBoxes[i].options[1] = new Option('1', '01');
+                userOpcodeBoxes[i].options[2] = new Option('2', '02');
+                userOpcodeBoxes[i].options[3] = new Option('3', '03');
+                userOpcodeBoxes[i].options[4] = new Option('4', '04');
+                userOpcodeBoxes[i].options[5] = new Option('5', '05');
+                userOpcodeBoxes[i].options[6] = new Option('6', '06');
+                userOpcodeBoxes[i].options[7] = new Option('7', '07');
+                userOpcodeBoxes[i].options[8] = new Option('8', '08');
+                userOpcodeBoxes[i].options[9] = new Option('9', '09');
+                userOpcodeBoxes[i].options[10] = new Option('A', '10');
+                userOpcodeBoxes[i].options[11] = new Option('B', '11');
+                userOpcodeBoxes[i].options[12] = new Option('C', '12');
+                userOpcodeBoxes[i].options[13] = new Option('D', '13');
+                userOpcodeBoxes[i].options[14] = new Option('E', '14');
+                userOpcodeBoxes[i].options[15] = new Option('F', '15');
+            }
+
+            function changeProgramCounter(changeAddr) {
+                if (halt) { return; }
+
+                programCounter = changeAddr;
+                if (programCounter > 31) {
+                    programCounter = programCounter % 32;
+                }
+                programCounterDisplay.innerHTML = crappyDec2Hex(programCounter);
+                programInfoDisplay.innerHTML = opcode2Readable(parseInt(userOpcodes[programCounter])) + ", " + crappyDec2Hex(parseInt(userData[programCounter]));
+            }
+
+            function increaseProgramCounter() {
+                changeProgramCounter(programCounter + 1);
+            }
+
+            function opcode2Readable(number) {
+                switch (number){
+                  case 0: return "NOP";
+                  case 1: return "NAND";
+                  case 2: return "AND";
+                  case 3: return "XOR";
+                  case 4: return "OR";
+                  case 5: return "TR";
+                  case 6: return "SKIP E";
+                  case 7: return "ADD";
+                  case 8: return "SUB";
+                  case 9: return "NOT";
+                  case 10: return "STO";
+                  case 11: return "LD A";
+                  case 12: return "SKIP NE";
+                  case 13: return "LD PC";
+                  case 14: return "ROT";
+                  case 15: return "HALT";
+                  default: console.log(number); return "Err";
+                }
+            }
+
             function crappyDec2Hex(number) {
                 switch (number){
-                  case 0:
-                    return "00";
-                  case 1:
-                    return "01";
-                  case 2:
-                    return "02";
-                  case 3:
-                    return "03";
-                  case 4:
-                    return "04";
-                  case 5:
-                    return "05";
-                  case 6:
-                    return "06";
-                  case 7:
-                    return "07";
-                  case 8:
-                    return "08";
-                  case 9:
-                    return "09";
-                  case 10:
-                    return "0A";
-                  case 11:
-                    return "0B";
-                  case 12:
-                    return "0C";
-                  case 13:
-                    return "0D";
-                  case 14:
-                    return "0E";
-                  case 15:
-                    return "0F";
-                  case 16:
-                    return "10";
-                  case 17:
-                    return "11";
-                  case 18:
-                    return "12";
-                  case 19:
-                    return "13";
-                  case 20:
-                    return "14";
-                  case 21:
-                    return "15";
-                  case 22:
-                    return "16";
-                  case 23:
-                    return "17";
-                  case 24:
-                    return "18";
-                  case 25:
-                    return "19";
-                  case 26:
-                    return "1A";
-                  case 27:
-                    return "1B";
-                  case 28:
-                    return "1C";
-                  case 29:
-                    return "1D";
-                  case 30:
-                    return "1E";
-                  case 31:
-                    return "1F"; // Function ends here because 5-bit numbers
-                  default:
-                    return "NaN";
+                  case 0: return "00";
+                  case 1: return "01";
+                  case 2: return "02";
+                  case 3: return "03";
+                  case 4: return "04";
+                  case 5: return "05";
+                  case 6: return "06";
+                  case 7: return "07";
+                  case 8: return "08";
+                  case 9: return "09";
+                  case 10: return "0A";
+                  case 11: return "0B";
+                  case 12: return "0C";
+                  case 13: return "0D";
+                  case 14: return "0E";
+                  case 15: return "0F";
+                  case 16: return "10";
+                  case 17: return "11";
+                  case 18: return "12";
+                  case 19: return "13";
+                  case 20: return "14";
+                  case 21: return "15";
+                  case 22: return "16";
+                  case 23: return "17";
+                  case 24: return "18";
+                  case 25: return "19";
+                  case 26: return "1A";
+                  case 27: return "1B";
+                  case 28: return "1C";
+                  case 29: return "1D";
+                  case 30: return "1E";
+                  case 31: return "1F"; // Function ends here because 5-bit numbers
+                  default: return "NaN";
                 }
-
             }
 
             function updateRamDisplay() {
@@ -348,60 +464,62 @@
                 skipLight.innerHTML = text;
             }
 
+            const crappyDec2BinArray = new Array(5);
+
             function crappyDec2Bin(BinaryString) {
 
                 switch (BinaryString.length) {
                     case 6:
                     case 5:
-                      accumulator1 = parseInt(BinaryString[0]);
-                      accumulator2 = parseInt(BinaryString[1]);
-                      accumulator3 = parseInt(BinaryString[2]);
-                      accumulator4 = parseInt(BinaryString[3]);
-                      accumulator5 = parseInt(BinaryString[4]);
+                      crappyDec2BinArray[0] = parseInt(BinaryString[0]);
+                      crappyDec2BinArray[1] = parseInt(BinaryString[1]);
+                      crappyDec2BinArray[2] = parseInt(BinaryString[2]);
+                      crappyDec2BinArray[3] = parseInt(BinaryString[3]);
+                      crappyDec2BinArray[4] = parseInt(BinaryString[4]);
                       break;
                     case 4:
-                      accumulator1 = 0;
-                      accumulator2 = parseInt(BinaryString[0]);
-                      accumulator3 = parseInt(BinaryString[1]);
-                      accumulator4 = parseInt(BinaryString[2]);
-                      accumulator5 = parseInt(BinaryString[3]);
+                      crappyDec2BinArray[0] = 0;
+                      crappyDec2BinArray[1] = parseInt(BinaryString[0]);
+                      crappyDec2BinArray[2] = parseInt(BinaryString[1]);
+                      crappyDec2BinArray[3] = parseInt(BinaryString[2]);
+                      crappyDec2BinArray[4] = parseInt(BinaryString[3]);
                       break;
                     case 3:
-                      accumulator1 = 0;
-                      accumulator2 = 0;
-                      accumulator3 = parseInt(BinaryString[0]);
-                      accumulator4 = parseInt(BinaryString[1]);
-                      accumulator5 = parseInt(BinaryString[2]);
+                      crappyDec2BinArray[0] = 0;
+                      crappyDec2BinArray[1] = 0;
+                      crappyDec2BinArray[2] = parseInt(BinaryString[0]);
+                      crappyDec2BinArray[3] = parseInt(BinaryString[1]);
+                      crappyDec2BinArray[4] = parseInt(BinaryString[2]);
                       break;
                     case 2:
-                      accumulator1 = 0;
-                      accumulator2 = 0;
-                      accumulator3 = 0;
-                      accumulator4 = parseInt(BinaryString[0]);
-                      accumulator5 = parseInt(BinaryString[1]);
+                      crappyDec2BinArray[0] = 0;
+                      crappyDec2BinArray[1] = 0;
+                      crappyDec2BinArray[2] = 0;
+                      crappyDec2BinArray[3] = parseInt(BinaryString[0]);
+                      crappyDec2BinArray[4] = parseInt(BinaryString[1]);
                       break;
                     case 1:
-                      accumulator1 = 0;
-                      accumulator2 = 0;
-                      accumulator3 = 0;
-                      accumulator4 = 0;
-                      accumulator5 = parseInt(BinaryString[0]);
+                      crappyDec2BinArray[0] = 0;
+                      crappyDec2BinArray[1] = 0;
+                      crappyDec2BinArray[2] = 0;
+                      crappyDec2BinArray[3] = 0;
+                      crappyDec2BinArray[4] = parseInt(BinaryString[0]);
                       break;
                     case 0:
-                      accumulator1 = 0;
-                      accumulator2 = 0;
-                      accumulator3 = 0;
-                      accumulator4 = 0;
-                      accumulator5 = 0;
+                      crappyDec2BinArray[0] = 0;
+                      crappyDec2BinArray[1] = 0;
+                      crappyDec2BinArray[2] = 0;
+                      crappyDec2BinArray[3] = 0;
+                      crappyDec2BinArray[4] = 0;
                       break;
                     default:
                       throw new Error("Dec to Bin Failure");
                       break;
                   }
-                return;
+                return crappyDec2BinArray;
             }
 
-            document.getElementById("CLK").onclick = function() {
+            function simulateProcessor(opcode, d1, d2, d3, d4, d5) {
 
                 if (halt) {
                     return;
@@ -410,54 +528,52 @@
                     skipNextCycle = 0;
                     skip = 1;
                     updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
-                    return
+                    return;
                 }
 
                 skip = 0;
 
-                 var currentOperation = (instruction1in.checked * 8) + (instruction2in.checked * 4) + (instruction3in.checked * 2) + (instruction4in.checked * 1);
-
-                 switch (currentOperation) {
+                 switch (opcode) {
                    case 0: // No operation
                    default:
                      break;
                    case 1: // NAND
-                     accumulator1 = !(accumulator1 & data1in.checked);
-                     accumulator2 = !(accumulator2 & data2in.checked);
-                     accumulator3 = !(accumulator3 & data3in.checked);
-                     accumulator4 = !(accumulator4 & data4in.checked);
-                     accumulator5 = !(accumulator5 & data5in.checked);
+                     accumulator1 = !(accumulator1 & d1);
+                     accumulator2 = !(accumulator2 & d2);
+                     accumulator3 = !(accumulator3 & d3);
+                     accumulator4 = !(accumulator4 & d4);
+                     accumulator5 = !(accumulator5 & d5);
                      break;
                    case 2: // AND
-                     accumulator1 = accumulator1 & data1in.checked;
-                     accumulator2 = accumulator2 & data2in.checked;
-                     accumulator3 = accumulator3 & data3in.checked;
-                     accumulator4 = accumulator4 & data4in.checked;
-                     accumulator5 = accumulator5 & data5in.checked;
+                     accumulator1 = accumulator1 & d1;
+                     accumulator2 = accumulator2 & d2;
+                     accumulator3 = accumulator3 & d3;
+                     accumulator4 = accumulator4 & d4;
+                     accumulator5 = accumulator5 & d5;
                      break;
                    case 3: // XOR
-                     accumulator1 = accumulator1 != data1in.checked;
-                     accumulator2 = accumulator2 != data2in.checked;
-                     accumulator3 = accumulator3 != data3in.checked;
-                     accumulator4 = accumulator4 != data4in.checked;
-                     accumulator5 = accumulator5 != data5in.checked;
+                     accumulator1 = accumulator1 != d1;
+                     accumulator2 = accumulator2 != d2;
+                     accumulator3 = accumulator3 != d3;
+                     accumulator4 = accumulator4 != d4;
+                     accumulator5 = accumulator5 != d5;
                      break;
                    case 4: // OR
-                     accumulator1 = accumulator1 | data1in.checked;
-                     accumulator2 = accumulator2 | data2in.checked;
-                     accumulator3 = accumulator3 | data3in.checked;
-                     accumulator4 = accumulator4 | data4in.checked;
-                     accumulator5 = accumulator5 | data5in.checked;
+                     accumulator1 = accumulator1 | d1;
+                     accumulator2 = accumulator2 | d2;
+                     accumulator3 = accumulator3 | d3;
+                     accumulator4 = accumulator4 | d4;
+                     accumulator5 = accumulator5 | d5;
                      break;
                    case 5: // TRANSFER
-                     accumulator1 = data1in.checked;
-                     accumulator2 = data2in.checked;
-                     accumulator3 = data3in.checked;
-                     accumulator4 = data4in.checked;
-                     accumulator5 = data5in.checked;
+                     accumulator1 = d1;
+                     accumulator2 = d2;
+                     accumulator3 = d3;
+                     accumulator4 = d4;
+                     accumulator5 = d5;
                      break;
                    case 6: // SKIP IF A=DATA
-                     if ((accumulator1 == data1in.checked) || (accumulator2 == data2in.checked) || (accumulator3 == data3in.checked) || (accumulator4 == data4in.checked) || (accumulator5 == data5in.checked)) {
+                     if ((accumulator1 == d1) || (accumulator2 == d2) || (accumulator3 == d3) || (accumulator4 == d4) || (accumulator5 == d5)) {
                          skipNextCycle = 1;
                      }
                      break;
@@ -466,23 +582,31 @@
                      // Convert to DEC
 
                      var accumulatorDec = (accumulator1 * 16) + (accumulator2 * 8) + (accumulator3 * 4) + (accumulator4 * 2) + (accumulator5 * 1);
-                     var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
+                     var dataDec = (d1 * 16) + (d2 * 8) + (d3 * 4) + (d4 * 2) + (d5 * 1);
 
                      var holderForMath = 0;
 
-                     if (currentOperation == 7) {
+                     if (opcode == 7) {
                          holderForMath = accumulatorDec + dataDec;
                      } else {
                          holderForMath = accumulatorDec - dataDec;
                      }
 
-                     if (holderForMath < 0) {
-                         holderForMath += 32;
+                     if (holderForMath <= 0) {
+                         holderForMath += 32
                      }
+
+                     holderForMath %= 32;
 
                      // Convert back to BIN
                      var BinaryString = Number(holderForMath).toString(2);
-                     crappyDec2Bin(BinaryString);
+                     var binArray = crappyDec2Bin(BinaryString);
+
+                     accumulator1 = binArray[0];
+                     accumulator2 = binArray[1];
+                     accumulator3 = binArray[2];
+                     accumulator4 = binArray[3];
+                     accumulator5 = binArray[4];
 
                      break;
                    case 9: // NOT A
@@ -495,7 +619,7 @@
                    case 10: // STORE A INTO $DATA
                      // Convert to Decimal
                      var accumulatorDec = (accumulator1 * 16) + (accumulator2 * 8) + (accumulator3 * 4) + (accumulator4 * 2) + (accumulator5 * 1);
-                     var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
+                     var dataDec = (d1 * 16) + (d2 * 8) + (d3 * 4) + (d4 * 2) + (d5 * 1);
 
                      computerRAM[dataDec] = accumulatorDec; // Store in the big array
 
@@ -503,17 +627,27 @@
 
                      break;
                    case 11:  // LOAD $DATA INTO A
-                     var dataDec = (data1in.checked * 16) + (data2in.checked * 8) + (data3in.checked * 4) + (data4in.checked * 2) + (data5in.checked * 1);
+                     var dataDec = (d1 * 16) + (d2 * 8) + (d3 * 4) + (d4 * 2) + (d5 * 1);
 
                      var BinaryString = Number(computerRAM[dataDec]).toString(2);
-                     crappyDec2Bin(BinaryString);
+
+                     var binArray = crappyDec2Bin(BinaryString);
+
+                     accumulator1 = binArray[0];
+                     accumulator2 = binArray[1];
+                     accumulator3 = binArray[2];
+                     accumulator4 = binArray[3];
+                     accumulator5 = binArray[4];
+
                      break;
                    case 12: // SKIP IF A!= DATA
-                     if ((accumulator1 != data1in.checked) || (accumulator2 != data2in.checked) || (accumulator3 != data3in.checked) || (accumulator4 != data4in.checked) || (accumulator5 != data5in.checked)) {
+                     if ((accumulator1 != d1) || (accumulator2 != d2) || (accumulator3 != d3) || (accumulator4 != d4) || (accumulator5 != d5)) {
                          skipNextCycle = 1;
                      }
                      break;
                    case 13: // LOAD DATA INTO PROGRAM COUNTER
+                     var dataDec = (d1 * 16) + (d2 * 8) + (d3 * 4) + (d4 * 2) + (d5 * 1);
+                     changeProgramCounter(dataDec);
                      break;
                    case 14: // ROR A
                      var temporaryVar = accumulator5;
@@ -528,6 +662,25 @@
                      break;
 
                 }
+            }
+
+            function updateUserOpcode() {
+                for (var i = 0; i < 32; i++) {
+                    userOpcodes[i] = userOpcodeBoxes[i].value;
+                }
+            }
+
+            function updateUserData() {
+                for (var i = 0; i < 32; i++) {
+                    userData[i] = userDataBoxes[i].value;
+                }
+            }
+
+            document.getElementById("CLK").onclick = function() {
+
+                 var currentOperation = (instruction1in.checked * 8) + (instruction2in.checked * 4) + (instruction3in.checked * 2) + (instruction4in.checked * 1);
+
+                 simulateProcessor(currentOperation, data1in.checked, data2in.checked, data3in.checked, data4in.checked, data5in.checked);
 
                 updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
             }
@@ -536,11 +689,25 @@
                 accumulator5 = accumulator4 = accumulator3 = accumulator2 = accumulator1 = 0;
                 skip = halt = 0;
 
+                changeProgramCounter(0);
+
                 updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
             }
 
             document.getElementById("GO").onclick = function() {
                 halt = 0;
+                updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
+            }
+
+            document.getElementById("SingleStep").onclick = function() {
+
+                var dataArray = crappyDec2Bin(Number(userData[programCounter]).toString(2));
+
+                simulateProcessor(parseInt(userOpcodes[programCounter]), dataArray[0], dataArray[1], dataArray[2], dataArray[3], dataArray[4]);
+
+                increaseProgramCounter();
+
+
                 updateBlinkenLights(accumulator1, accumulator2, accumulator3, accumulator4, accumulator5, skip, halt);
             }
 
