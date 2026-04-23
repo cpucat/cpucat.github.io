@@ -133,7 +133,7 @@
             <td>1101</td>
             <td>D</td>
             <td>LD A, PC</td>
-            <td>Loads A into the Program Counter (Currently not in Simulator)</td>
+            <td>Loads A into the Program Counter (Currently not in Simulator) (Not required for implementation)</td>
           </tr>
           <tr>
             <td>1110</td>
@@ -152,7 +152,9 @@
         <br>
 
         <p><img src="/images/CPU-1-LogisimExport.png" alt="Logisim Diagram of this computer" style="float:right;">The LogiSim version of this computer is available for download <a href="/files/CPU-1-Logisim.circ" download>here.</a></p>
-
+        <br>
+        <p>The instruction with opcode 1101 (LD A, PC) is not required for implementation, as this processor was designed to be able to be used with a paper tape reader for simpler operation via the SKIP instructions.</p>
+        <p>This processor's opcode list was inspired by the Intel 4004 and UE-1.</p>
         <script>
             //░ for 0, ▓ for 1.
             const accumulatorDisplay = document.getElementById("accumulatorDisplay");
