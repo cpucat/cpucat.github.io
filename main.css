@@ -3,6 +3,21 @@ body {
   background-size: 2em;
 }
 
+table {
+  border-collapse: collapse;
+  width: 98%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 #mainWrapper {
   width: 90%;
   height: 90%;
