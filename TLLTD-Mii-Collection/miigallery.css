@@ -33,8 +33,9 @@ overflow: scroll;
 }
 
 #BottomBlobs {
-overflow:hidden;
+overflow: hide;
 position: absolute;
+white-space: nowrap;
 bottom: 16.9rem;
 left: 0px;
 right: 0px;
