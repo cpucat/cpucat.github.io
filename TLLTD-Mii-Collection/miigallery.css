@@ -1,0 +1,112 @@
+ @font-face {
+     font-family: Fredoka;
+     src: url(otherAssets/Fredoka.woff2);
+ }
+
+.MiiFace {
+    display: inline-block;
+    padding-left:1%;
+    padding-right:1%;
+    transform: scale(90%) translateY(-15%);
+}
+
+
+/* Im 100% sure that this is the best way to go about hair sizes, dont even @ me */
+
+#HairLarge {
+transform: translateY(20%);
+}
+#HairMedium {
+transform: translateY(15%);
+}
+#HairSmall {
+transform: translateY(11%);
+}
+
+#MiiSelector {
+white-space: nowrap;
+overflow: scroll;
+}
+
+@keyframes blobsAnim {
+    to { transform: translateX(-10%);}
+}
+
+#BottomBlobs {
+overflow:hidden;
+position: absolute;
+bottom: 16.9rem;
+left: 0px;
+right: 0px;
+background: url('otherAssets/blob.png') center center repeat;
+height: 0.6rem;
+width: 200%;
+animation: blobsAnim 20s alternate infinite ease-in-out;
+
+}
+
+
+#BottomColor {
+position: absolute;
+bottom: 0px;
+left: 0px;
+right: 0px;
+background-color: #ffd978;
+}
+
+#MiiCard {
+display: inline-block;
+width:40%;
+}
+#MiiInfoBox {
+display: inline-block;
+width: 100%;
+}
+
+#InfoDiv {
+display: inline-block;
+border-radius: 25px;
+padding: 20px;
+background-color: #ffffff;
+}
+
+body {
+    background-color: #ffc100;
+    overflow: hidden;
+    font-family: Fredoka;
+    font-size: 1.5em;
+}
+
+table {
+    width: 100%;
+    height: 70%;
+}
+
+@keyframes backgroundAnim {
+    0% {
+        transform: rotate(0deg)
+        translateY(10%) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg)
+        translateY(10%) rotate(-360deg);
+    }
+}
+/* I wanted it to scroll infinitely, but it kept hitching, so a circle is what you get i guess */
+#TilingBits {
+z-index: -1;
+width: 200%;
+height: 200%;
+position: absolute;
+white-space: nowrap;
+right: -20%;
+top: -20%;
+background: url('otherAssets/tilingBG.png') center center repeat;
+overflow: hide;
+background-size: 25%;
+animation-timing-function: linear;
+animation-name: backgroundAnim;
+animation-duration: 60s;
+animation-iteration-count: infinite;
+}
