@@ -1,0 +1,16 @@
+{
+"companyName": "Cpucat Studios",
+"productName": "Portrait of an american",
+"productVersion": "1.0",
+"dataUrl": "Portrait of an american HTML5.data",
+"wasmCodeUrl": "Portrait of an american HTML5.wasm",
+"wasmFrameworkUrl": "Portrait of an american HTML5.framework.js",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2020.1.0a12"
+}

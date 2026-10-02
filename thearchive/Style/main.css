@@ -1,0 +1,22 @@
+body {
+  background: rgb(2,0,36);
+  background: linear-gradient(-90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+}
+h2 {
+  color: black;
+  text-shadow: 2px 4px 2px white;
+}
+h1 {
+  text-shadow: 2px 2px 4px white;
+  text-align: center;
+  color: black;
+  font-size: 35px;
+}
+p {
+  text-shadow: 2px 2px 4px white;
+  color: black;
+}
+a {
+  color: black;
+}
+

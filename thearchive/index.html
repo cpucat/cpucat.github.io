@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+      <title>Cpucat's Stuff Site</title>
+      <link rel="stylesheet" href="/Style/main.css">
+  </head>
+  <body onload="checkName()">
+   <h1>Home</h1>
+   <h3 id="nameGreeting"></h3>
+   <h2>Game Games</h2>
+   <a href="https://cpucat.github.io/flight-unity/">Drone game</a><br>
+   <a href="https://cpucat.github.io/dogfight-UNITY/">Play Dogfight (2-Player) NOT ONLINE</a><br>
+   <a href="https://cpucat.github.io/FPS-UNITY/">FPS game (new levels whenever, so check back soon!)</a><br>
+   <a href="https://cpucat.github.io/BEAN/">BEAN game</a>
+   <h2>School games</h2>
+   <a href="https://cpucat.github.io/benfranklinproject/">Portrait of an american game</a><br>
+   <a href="https://cpucat.github.io/cpgroundgames.html">game that requires circuit playground express</a><br>
+   <a href="https://cpucat.github.io/Bio_Project/index.html">Endangered species project</a><br>
+   <h2>Not Games</h2>
+   <a href="https://cpucat.github.io/diceroll.html">Dice Roller</a><br>
+   <a href="https://cpucat.github.io/htmlrickroll.html">html RickRollOnMouseOver</a></br>
+   <a href="https://cpucat.github.io/SimpleCalculator.html">Simple Calculator</a><br>
+  <script>
+   //I learned this from W3 Schools tutorials, check them out!
+    function setCookie(cookingname,cookingvalue,expiredays) {
+      const date = new Date();
+      date.setTime(date.getTime() + (expiredays*24*60*60*1000));
+      let expires = "expires=" + date.toGMTString();
+      document.cookie = cookingname + "=" + cookingvalue + ";" + expires + ";path=/";
+    }
+  
+    function getCookie(cookiename) {
+      let cookedname = cookiename + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(cookedname) == 0) {
+          return c.substring(cookedname.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function checkName() {
+      let name = getCookie("username");
+      if (name != "") {
+        document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+      } else {
+         name = prompt("Please enter your name for custom greetings:","");
+         if (name != "" && name != null) {
+           setCookie("username", name, 30);
+           document.getElementById("nameGreeting").innerHTML = "Hello, " + name + "!";
+         }
+      }
+    }
+  </script>
+  </body>
+</html>

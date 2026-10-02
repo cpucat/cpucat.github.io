@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>General JS, HTML, CSS Tests</title>
+  </head>
+  <body onload="cookieCheck()">
+    <audio id="thereWasAReasonForRRoll">
+      <source src="https://cpucat.github.io/rroll.mp3" type="audio/mpeg">
+    Your Browser will not support RICKROLL.
+    </audio>
+    <br>
+    <p id="mouseOverOutSimpleP" onmouseover="DemoPonMouseOver()" onmouseout="DemoPonMouseOut()">MouseDemo</p>
+    <img onmouseover="playAudio()" src="https://cpucat.github.io/images/dont_touch_img.gif" name="pic" alt="Rickroll">
+    <script>
+      var pOnMouseOver = document.getElementById("mouseOverOutSimplep");
+      var RRollContainer = document.getElementById("thereWasAReasonForRRoll");
+      
+      function DemoPonMouseOver(){
+        pOnMouseOver.innerHTML = "MouseOver";
+      }
+      function DemoPonMouseOut() {
+        pOnMouseOver.innerHTML = "MouseOut";
+      }
+      function playAudio() {
+        window.alert("WHY ARE YOU LIKE THIS");
+        window.alert("WHY DID YOU MOUSEOVER");
+        window.alert("PREPARE TO");
+        window.alert("NEVER GIVE UP THIS MISTAKE");
+        RRollContainer.play();
+        document.pic.src='https://cpucat.github.io/images/get_shreked.gif';
+      }
+    </script>
+    <br>
+  </body>
+</html>
